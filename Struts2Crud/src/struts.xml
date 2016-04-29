@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<package name="mydefault" extends="struts-default">
+		<interceptors>
+			<interceptor name="permissionInterceptor" class="cn.itcast.interceptor.PermissionInterceptor"></interceptor>
+			<interceptor-stack name="mydefaultstack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="permissionInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+	</package>
+	<package name="user" namespace="/user" extends="mydefault">
+		<action name="login" class="cn.itcast.domain.User" method="login">
+			<result name="success">/listUsers.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		<action name="user_*" class="cn.itcast.domain.User" method="{1}">
+			<interceptor-ref name="mydefaultstack"></interceptor-ref>
+			<result name="success">/listUsers.jsp</result>
+			<result type="redirectAction" name="delOk">user_listUsers</result>
+			<result name="input">/{1}.jsp</result>
+			<result name="saveOk">/success.jsp</result>
+			<result name="editOk">/success.jsp</result>
+			<result name="editUI">/editUser.jsp</result>
+			<result name="showUser">/showUser.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		
+		<action name="download" class="cn.itcast.domain.User" method="download">
+			<interceptor-ref name="mydefaultstack"></interceptor-ref>
+			<result type="stream" name="success">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputStream">inputStream</param><!-- 输入是对应的动作类中的那个字段 -->
+				<param name="contentDisposition">attachment;filename=${filename}</param><!-- 要下载的文件名 -->
+			</result>
+			<result name="login">/login.jsp</result>
+		</action>
+	</package>
+</struts>
