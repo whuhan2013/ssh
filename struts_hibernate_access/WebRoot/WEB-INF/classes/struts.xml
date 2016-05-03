@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<package name="struts-global" namespace="/" extends="struts-default">
+		<global-results>
+			<result name="errHandler" type="chain">
+				<param name="actionName">errorProcessor</param>
+			</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="errHandler" />
+		</global-exception-mappings>
+
+		<action name="errorProcessor" class="cn.itcast.sh.error.ErrorProcess">
+			<result>error.jsp</result>
+		</action>
+	</package>
+	<include file="struts-user.xml"></include>
+	<include file="struts-login.xml"></include>
+	<include file="struts-forward.xml"></include>
+</struts>

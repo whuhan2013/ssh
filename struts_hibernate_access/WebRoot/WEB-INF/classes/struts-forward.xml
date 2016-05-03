@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<package name="forward" namespace="/" extends="struts-default">
+		<action name="forwardAction" class="cn.itcast.sh.action.ForwardAction">
+			<result name="top">WEB-INF/jsp/index/top.jsp</result>
+			<result name="left">WEB-INF/jsp/index/left.jsp</result>
+			<result name="bottom">WEB-INF/jsp/index/bottom.jsp</result>
+		</action>
+	</package>
+</struts>

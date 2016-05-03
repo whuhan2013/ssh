@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<package name="login" namespace="/" extends="struts-global">
+		<action name="loginAction_*" method="{1}" class="cn.itcast.sh.action.LoginAction">
+			<result name="index">WEB-INF/jsp/index/home.jsp</result>
+		</action>
+	</package>
+</struts>
+ 
