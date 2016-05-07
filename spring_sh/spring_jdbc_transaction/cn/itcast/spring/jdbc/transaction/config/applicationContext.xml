@@ -1,0 +1,70 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:jdbc.properties</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="personDao" class="cn.itcast.spring.jdbc.transaction.sh.dao.PersonDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="personService"
+		class="cn.itcast.spring.jdbc.transaction.sh.service.PersonServiceImpl">
+		<property name="personDao">
+			<ref bean="personDao" />
+		</property>
+	</bean>
+
+	<bean id="myException" class="cn.itcast.spring.jdbc.transaction.
+	exception.MyException"></bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+	<!--
+		通知 1、告诉spring容器，采用什么样的方法处理事务 2、告诉spring容器，目标方法应该采用什么样的事务处理策略
+	-->
+	<tx:advice id="tx" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!--
+				name规定方法 isolation 默认值为DEFAULT propagation 传播机制 REQUIRED
+			-->
+			<tx:method name="save*" read-only="false" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut
+			expression="execution(* cn.itcast.spring.jdbc.transaction.sh.service.*.*(..))"
+			id="perform" />
+		<aop:advisor advice-ref="tx" pointcut-ref="perform" />
+		<aop:aspect ref="myException">
+			<aop:after-throwing method="myException"
+				pointcut-ref="perform" throwing="ex" />
+		</aop:aspect>
+	</aop:config>
+</beans>

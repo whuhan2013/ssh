@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!-- 
+		把person和student放入到spring容器中
+	 -->
+	 <!-- 
+	 	property是用来描述一个类的属性
+	 	   基本类型的封装类、String等需要值的类型用value赋值
+	 	  引用类型用ref赋值
+	  -->
+	<bean id="person" class="cn.itcast.spring.sh.di.set.Person">
+		<property name="pid" value="1"></property>
+		<property name="pname" value="aaa"></property>
+		<property name="student">
+			<ref bean="student1"/>
+		</property>
+		<property name="lists">
+			<list>
+				<value>list1</value>
+				<ref bean="student1"/>
+				<value>list2</value>
+			</list>
+		</property>
+		<property name="sets">
+			<set>
+				<value>set1</value>
+				<ref bean="student1"/>
+				<value>set2</value>
+			</set>
+		</property>
+		<property name="map">
+			<map>
+				<entry key="m1">
+					<value>map1</value>
+				</entry>
+				<entry key="m2">
+					<ref bean="student1"/>
+				</entry>
+			</map>
+		</property>
+		<property name="properties">
+			<props>
+				<prop key="prop1">
+					prop1
+				</prop>
+				<prop key="prop2">
+					prop2
+				</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="student1" class="cn.itcast.spring.sh.di.set.Student"></bean>
+</beans>

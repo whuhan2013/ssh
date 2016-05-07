@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <!-- 
+    	
+     -->
+	<bean id="person_Con" class="cn.itcast.spring.sh.di.constructor.Person">
+		<constructor-arg index="0" type="java.lang.Long" value="1"></constructor-arg>
+		<constructor-arg index="1" value="aaa"></constructor-arg>
+		<constructor-arg index="2" ref="student_Con"></constructor-arg>
+	</bean>
+	
+	<bean id="student_Con" class="cn.itcast.spring.sh.di.constructor.Student"></bean>
+</beans>

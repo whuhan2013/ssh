@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+    <!-- 
+    	导入目标类，导入切面
+     -->       
+     <bean id="personDao" class="cn.itcast.spring.aop.sh.PersonDaoImpl"></bean>
+     
+     <bean id="myTransaction" class="cn.itcast.spring.aop.sh.MyTransaction"></bean>
+     
+     <!-- 
+     	aop的配置
+      -->
+      <aop:config>
+      	<!-- 
+      		 切入点表达式
+      	 -->
+      	<aop:pointcut expression="execution(* cn.itcast.spring.aop.sh.PersonDaoImpl.*(..))" id="perform"/>
+      	<aop:aspect ref="myTransaction">
+      	<!-- 
+      		<aop:before method="beginTransaction" pointcut-ref="perform"/>
+      		<aop:after-returning method="commit" pointcut-ref="perform" returning="var"/>
+      	 -->
+      		<aop:after method="finallyMethod" pointcut-ref="perform"/>
+      		<aop:after-throwing method="throwingMethod" pointcut-ref="perform" throwing="ex"/>
+      		<aop:around method="aroundMethod" pointcut-ref="perform"/>
+      	</aop:aspect>
+      </aop:config>
+</beans>

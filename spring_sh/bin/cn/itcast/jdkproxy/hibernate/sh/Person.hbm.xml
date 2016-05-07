@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 
+		用来描述一个持久化类
+		name  类的全名
+	 	table 可以不写  默认值和类名一样 
+	 	catalog  数据库的名称  一般不写
+	 -->
+	<class name="cn.itcast.jdkproxy.hibernate.sh.Person">
+		<!-- 
+			标示属性  和数据库中的主键对应
+			name  属性的名称
+			column 列的名称
+		 -->
+		<id name="pid" column="pid" length="200" type="java.lang.Long">
+			<!-- 
+				主键的产生器
+				  就该告诉hibernate容器用什么样的方式产生主键
+			 -->
+			<generator class="increment"></generator>
+		</id>
+		<!-- 
+			描述一般属性
+		 -->
+		<property name="pname" column="pname" length="20" type="string">
+		</property>
+		
+		<property name="psex" column="psex" length="10" type="java.lang.String"></property>
+	</class>
+</hibernate-mapping>
