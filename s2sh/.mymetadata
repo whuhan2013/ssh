@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="s2sh"
+  id="myeclipse.1462668317032"
+  context-root="/s2sh"
+  j2ee-spec="6.0"
+  archive="s2sh.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
