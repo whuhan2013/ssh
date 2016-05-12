@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="AndroidStruts2JSON"
+  id="myeclipse.1322830883078"
+  context-root="/AndroidStruts2JSON"
+  j2ee-spec="5.0"
+  archive="AndroidStruts2JSON.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

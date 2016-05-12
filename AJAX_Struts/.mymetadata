@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="AJAX_Struts"
+  id="myeclipse.1462793939992"
+  context-root="/AJAX_Struts"
+  j2ee-spec="6.0"
+  archive="AJAX_Struts.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
